@@ -760,7 +760,7 @@ int8_t calibrateAccel()
 	_azbD = 0;
 	for (size_t i = 0; i < _numSamples; i++)
 	{
-		readSensor();
+		MPU_readSensor();
 		_axbD += (getAccelX_mss() / _axs + _axb) / ((double) _numSamples);
 		_aybD += (getAccelY_mss() / _ays + _ayb) / ((double) _numSamples);
 		_azbD += (getAccelZ_mss() / _azs + _azb) / ((double) _numSamples);
@@ -892,7 +892,7 @@ int8_t calibrateMag()
 	}
 
 	// get a starting set of data
-	readSensor();
+	MPU_readSensor();
 	_hxmax = getMagX_uT();
 	_hxmin = getMagX_uT();
 	_hymax = getMagY_uT();
@@ -906,7 +906,7 @@ int8_t calibrateMag()
 	{
 		_delta = 0.0f;
 		_framedelta = 0.0f;
-		readSensor();
+		MPU_readSensor();
 		_hxfilt = (_hxfilt * ((float) _coeff - 1) + (getMagX_uT() / _hxs + _hxb)) / ((float) _coeff);
 		_hyfilt = (_hyfilt * ((float) _coeff - 1) + (getMagY_uT() / _hys + _hyb)) / ((float) _coeff);
 		_hzfilt = (_hzfilt * ((float) _coeff - 1) + (getMagZ_uT() / _hzs + _hzb)) / ((float) _coeff);
