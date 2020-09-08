@@ -1,6 +1,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "sysclock.h"
+#include "iic.h"
+#include "eeprom.h"
 #include "mpu.h"
 
 
@@ -16,6 +18,8 @@ int main(void)
 	/* Configure the system clock */
 	SystemClock_Config();
 
+	// Initialize the IIC peripheral
+	IIC_Init();
 	MPU_Init();
 
 	while(MPU_whoAmI() != 0x71){
