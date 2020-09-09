@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l1xx_it.h"
+#include "tsl_time.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -185,12 +186,12 @@ void SysTick_Handler(void)
 
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
+  /* TSL timing for ECS, DTO */
+  TSL_tim_ProcessIT();
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   /* USER CODE END SysTick_IRQn 1 */
 }
-
-
 
 /******************************************************************************/
 /* STM32L1xx Peripheral Interrupt Handlers                                    */
@@ -198,17 +199,6 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32l1xx.s).                    */
 /******************************************************************************/
-
-
-
-/**
- * @brief This function handles RTC wake-up interrupt through EXTI line 20.
- */
-void RTC_WKUP_IRQHandler(void)
-{
-	HAL_RTCEx_WakeUpTimerIRQHandler(&hrtc);
-}
-
 
 /* USER CODE BEGIN 1 */
 

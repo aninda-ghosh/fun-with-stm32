@@ -1,19 +1,10 @@
 /* Includes ------------------------------------------------------------------*/
-#include "stdlib.h"
 #include "main.h"
 #include "sysclock.h"
-#include "rtc.h"
-#include "iic.h"
-#include "eeprom.h"
+#include "touchsensing.h"
 
-
-typedef struct __attribute__ ((packed)) calibData{
-	float a;	//4
-	float b; 	//4
-	float c; 	//4
-}CALIB_DATA;
-
-CALIB_DATA cd = {1.1, 2.2, 3.3};
+#define enableGlobalInterrupts()   __set_PRIMASK(0);
+#define disableGlobalInterrupts()  __set_PRIMASK(1);
 
 /**
  * @brief  The application entry point.
@@ -26,46 +17,24 @@ int main(void) {
 	/* Configure the system clock */
 	SystemClock_Config();
 
-	rtc_Init();
-	rtc_SetDateTime(17, 03, 30, 1, 24, RTC_MONTH_AUGUST, 20, RTC_WEEKDAY_MONDAY);
-	// Initialize the IIC peripheral
-	IIC_Init();
+	enableGlobalInterrupts();
 
-
-	while(IIC_IsDevReady(0x57<<1) != 0){
- 		__NOP();
-	}
-
-
-	//Write 2 first 32 bytes of data
-	uint16_t startAddress = 0;
-	uint8_t writedata = 0;
-	for( ;startAddress < 32; startAddress++){
-		if(writedata > 128)
-			writedata = 0;
-		writeEEPROMByte(startAddress, writedata++);
-		HAL_Delay(1);
-	}
-
-	//Read from first 32 bytes of data
-	startAddress = 0;
-	for( ;startAddress < 32; startAddress++){
-		uint8_t data = readEEPROMByte(startAddress);
-		HAL_Delay(1);
-		UNUSED(data);
-	}
-
+	TouchSensing_Init();
 
 	/* Infinite loop */
 	while (1) {
-
-//		rtc_GetDateTime();		//Refresh the Time Stamp from RTC
-//		unsigned int unixTimeStamp = rtc_GetEpochTime(&systemDate, &systemTime);
-//		__NOP();
-//		UNUSED(unixTimeStamp);
-
-		HAL_Delay(1000);
+		uint8_t status = GetTouchSensing_Status();
+		if (status == TSL_STATUS_OK) {
+			ProcessSwipe(); // Execute sensors related tasks
+		}
+		if (swipe_event == 1) {
+			swipe_event = 0;
+		} else if (swipe_event == 2) {
+			swipe_event = 0;
+		}
+		HAL_Delay(100);
 	}
+
 }
 
 /**
@@ -73,7 +42,10 @@ int main(void) {
  * @retval None
  */
 void Error_Handler(void) {
+	/* USER CODE BEGIN Error_Handler_Debug */
+	/* User can add his own implementation to report the HAL error return state */
 
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
