@@ -35,6 +35,25 @@
  * 128  Bytes - User Specific Config Variables   (0x0201 - 0x0280)
  * 3456 Bytes - Logs							 (0x0281 - 0x1000)
  */
+#define CALIB_PARTITION 1
+#define USER_PARTITION 2
+#define LOGS_PARTITION 3
+
+#define CALIB_PARTITION_START 0x0000
+#define CALIB_PARTITION_END 0x0200
+#define CALIB_PARTITION_POINTER_ADDR 0x0000
+#define CALIB_PARTITION_LID_ADDR 0x0002
+#define CALIB_PARTITION_TID_ADDR 0x0004
+
+#define USER_PARTITION_START 0x0201
+#define USER_PARTITION_END 0x0280
+
+#define LOGS_PARTITION_START 0x0281
+#define LOGS_PARTITION_END 0x1000
+
+#define CREATE 1
+#define UPDATE 2
+#define DELETE 3
 
 
 
@@ -42,6 +61,12 @@ int8_t readEEPROMByte(const uint16_t address);
 int8_t writeEEPROMByte(const uint16_t address, uint8_t data);
 
 
+int8_t formatEEPROM(void);
+int8_t formatCalibPartition(void);
+int8_t formatLogsPartition(void);
+
+int8_t writeCalibPartition(uint8_t* dataptr, uint16_t size, uint8_t typeofoperation);
+int8_t readCalibPartition(uint8_t* dataptr, uint16_t size);
 
 
 #endif /* INC_EEPROM_H_ */
