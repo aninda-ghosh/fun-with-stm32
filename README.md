@@ -23,5 +23,7 @@ Use I2C and SPI to implement communications between different kinds of sensors i
 
 ## Level 4
 Dive into the Low Power Modes and Touch Sensing available in the STM32L series.
+See branch 
+* touch-sensing for reference
 
 Bonus - Understand the Debugging Concepts using GDB and STLink.
