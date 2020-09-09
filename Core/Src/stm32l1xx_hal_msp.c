@@ -103,7 +103,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF4_I2C1;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
@@ -144,6 +144,44 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
 
   /* USER CODE END I2C1_MspDeInit 1 */
   }
+
+}
+
+
+/**
+ * @brief RTC MSP Initialization
+ * This function configures the hardware resources used in this example
+ * @param hrtc: RTC handle pointer
+ * @retval None
+ */
+void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
+{
+	if (hrtc->Instance == RTC)
+	{
+		/* Peripheral clock enable */
+		__HAL_RCC_RTC_ENABLE();
+		/* RTC interrupt Init */
+		HAL_NVIC_SetPriority(RTC_WKUP_IRQn, 0, 0);
+		HAL_NVIC_EnableIRQ(RTC_WKUP_IRQn);
+	}
+
+}
+
+/**
+ * @brief RTC MSP De-Initialization
+ * This function freeze the hardware resources used in this example
+ * @param hrtc: RTC handle pointer
+ * @retval None
+ */
+void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
+{
+	if (hrtc->Instance == RTC)
+	{
+		/* Peripheral clock disable */
+		__HAL_RCC_RTC_DISABLE();
+		/* RTC interrupt DeInit */
+		HAL_NVIC_DisableIRQ(RTC_WKUP_IRQn);
+	}
 
 }
 

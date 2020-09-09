@@ -52,4 +52,5 @@ Mkfile.old
 dkms.conf
 
 Debug/*
-/.metadata/
+.metadata/
+.settings/*
