@@ -13,6 +13,10 @@ Use the peripherals available in the STM MCu itself like RTC Calendar, RTC Backu
 
 ## Level 2
 Setup of Communication protocols like I2C, SPI, USART etc. 
+See commits
+* 2f7d9bf Added I2C for EEPROM
+* 80a6c2d Added EEPROM Partitioning
+
 
 ## Level 3
 Use I2C and SPI to implement communications between different kinds of sensors in real life scenarios e.g. MPU9250 9DOF MPU.

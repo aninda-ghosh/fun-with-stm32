@@ -26,7 +26,7 @@ int8_t writeEEPROMByte(const uint16_t address, uint8_t data){
 }
 
 
-// Format the EEPROM by writing it PageWize
+
 int8_t formatEEPROM(void){
 	int8_t ret;
 	uint16_t eepromWriteAddress = 0;
