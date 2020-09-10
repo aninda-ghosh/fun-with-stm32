@@ -59,10 +59,11 @@
 
 int8_t readEEPROMByte(const uint16_t address);
 int8_t writeEEPROMByte(const uint16_t address, uint8_t data);
-
+int8_t peekPartition(uint8_t partition);
 
 int8_t formatEEPROM(void);
 int8_t formatCalibPartition(void);
+int8_t formatUserPartition(void);
 int8_t formatLogsPartition(void);
 
 int8_t writeCalibPartition(uint8_t* dataptr, uint16_t size, uint8_t typeofoperation);

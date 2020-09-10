@@ -25,7 +25,41 @@ int8_t writeEEPROMByte(const uint16_t address, uint8_t data){
 	return IIC_Write16bitaddress(EEPROM_ADDRESS, address, 1, &data);
 }
 
-
+int8_t peekPartition(uint8_t partition){
+	switch(partition){
+		case CALIB_PARTITION: {
+			//Read from first 32 bytes of data
+			uint16_t startAddress = CALIB_PARTITION_START;
+			for( ;startAddress < CALIB_PARTITION_END; startAddress++){
+				uint8_t data = readEEPROMByte(startAddress);
+				HAL_Delay(1);
+				UNUSED(data);
+			}
+			break;
+		}
+		case USER_PARTITION : {
+			//Read from first 32 bytes of data
+			uint16_t startAddress = USER_PARTITION_START;
+			for( ;startAddress < USER_PARTITION_END; startAddress++){
+				uint8_t data = readEEPROMByte(startAddress);
+				HAL_Delay(1);
+				UNUSED(data);
+			}
+			break;
+		}
+		case LOGS_PARTITION : {
+			//Read from first 32 bytes of data
+			uint16_t startAddress = LOGS_PARTITION_START;
+			for( ;startAddress < LOGS_PARTITION_END; startAddress++){
+				uint8_t data = readEEPROMByte(startAddress);
+				HAL_Delay(1);
+				UNUSED(data);
+			}
+			break;
+		}
+	}
+	return 0;
+}
 
 int8_t formatEEPROM(void){
 	int8_t ret;
@@ -92,6 +126,9 @@ int8_t writeCalibPartition(uint8_t* dataptr, uint16_t size, uint8_t typeofoperat
 	calibpartition_pointer = readEEPROMByte(CALIB_PARTITION_POINTER_ADDR+1);
 	calibpartition_pointer = (calibpartition_pointer << 8);
 	calibpartition_pointer += (uint16_t)readEEPROMByte(CALIB_PARTITION_POINTER_ADDR);
+
+	if(calibpartition_pointer == 0x0000)
+		calibpartition_pointer = 0x0005;
 
 	switch(typeofoperation){
 		case CREATE: {

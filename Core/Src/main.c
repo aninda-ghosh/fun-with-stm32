@@ -36,24 +36,23 @@ int main(void) {
  		__NOP();
 	}
 
+	formatCalibPartition();
 
-	//Write 2 first 32 bytes of data
-	uint16_t startAddress = 0;
-	uint8_t writedata = 0;
-	for( ;startAddress < 32; startAddress++){
-		if(writedata > 128)
-			writedata = 0;
-		writeEEPROMByte(startAddress, writedata++);
-		HAL_Delay(1);
-	}
+//	//Write 2 first 32 bytes of data
+//	uint16_t startAddress = 0;
+//	uint8_t writedata = 0;
+//	for( ;startAddress < 32; startAddress++){
+//		if(writedata > 128)
+//			writedata = 0;
+//		writeEEPROMByte(startAddress, writedata++);
+//		HAL_Delay(1);
+//	}
 
-	//Read from first 32 bytes of data
-	startAddress = 0;
-	for( ;startAddress < 32; startAddress++){
-		uint8_t data = readEEPROMByte(startAddress);
-		HAL_Delay(1);
-		UNUSED(data);
-	}
+
+
+	writeCalibPartition((uint8_t*)&cd,sizeof(CALIB_DATA), CREATE);
+
+	peekPartition(CALIB_PARTITION);
 
 
 	/* Infinite loop */
