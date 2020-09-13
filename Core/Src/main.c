@@ -25,12 +25,7 @@ int main(void) {
 	while (1) {
 		uint8_t status = GetTouchSensing_Status();
 		if (status == TSL_STATUS_OK) {
-			ProcessSwipe(); // Execute sensors related tasks
-		}
-		if (swipe_event == 1) {
-			swipe_event = 0;
-		} else if (swipe_event == 2) {
-			swipe_event = 0;
+
 		}
 		HAL_Delay(100);
 	}

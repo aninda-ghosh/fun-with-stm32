@@ -44,7 +44,6 @@
 
 /* Exported functions ------------------------------------------------------- */
 TSL_Status_enum_T TSL_Init(CONST TSL_Bank_T *bank);
-TSL_Status_enum_T TSL_tim_Init(void);
 
 #endif /* __TSL_H */
 

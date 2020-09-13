@@ -47,7 +47,7 @@
 
 /** Total number of "Extended" TouchKeys in application (range=0..255)
 */
-#define TSLPRM_TOTAL_TOUCHKEYS (0)
+#define TSLPRM_TOTAL_TOUCHKEYS (3)
 
 /** Total number of "Basic" TouchKeys in application (range=0..255)
 */
@@ -56,7 +56,7 @@
 /** Total number of "Extended" Linear and Rotary sensors in application (range=0..255)
   - Count also the 1-channel linear sensor used as TouchKey
 */
-#define TSLPRM_TOTAL_LINROTS (1)
+#define TSLPRM_TOTAL_LINROTS (0)
 
 /** Total number of "Basic" Linear and Rotary sensors in application (range=0..255)
   - Count also the 1-channel linear sensor used as TouchKey
@@ -66,12 +66,12 @@
 /** Total number of "Extended & Basic" Linear and Rotary sensors in application (range=0..255)
   - Count also the 1-channel linear sensor used as TouchKey
 */
-#define TSLPRM_TOTAL_ALL_LINROTS (1)
+#define TSLPRM_TOTAL_ALL_LINROTS (0)
 
 /** Total number of sensors/objects in application (range=1..255)
   - Count all TouchKeys, Linear and Rotary sensors
 */
-#define TSLPRM_TOTAL_OBJECTS (1)
+#define TSLPRM_TOTAL_OBJECTS (3)
 
 /** @} Common_Parameters_Number_Of_Elements */
 
@@ -249,7 +249,6 @@
 /** Select which Linear and Rotary sensors you use in your application.
     - 0 = Not Used
     - 1 = Used
-
   LIN = Linear sensor
   ROT = Rotary sensor
   M1 = Mono electrodes design with 0/255 position at extremities of the sensor
@@ -388,7 +387,6 @@
   - Examples:
       - With a DTO equal to 2, the time out is between 1s and 2s.
       - With a DTO equal to 63, the time out is between 62s and 63s.
-
 @note The DTO can be changed in run-time by the application only if the
       default value is between 1 and 63.
 */

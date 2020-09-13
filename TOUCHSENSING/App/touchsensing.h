@@ -26,7 +26,7 @@ uint8_t touch_event;
 /* TOUCHSENSING init function */
 void TouchSensing_Init(void);
 uint8_t GetTouchSensing_Status(void);
-void ProcessSwipe();
+int8_t processTouchKeys(void);
 
 #ifdef __cplusplus
 }

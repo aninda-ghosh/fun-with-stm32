@@ -9,9 +9,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx_hal.h"
 
-
-uint8_t swipe_event;
-
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
