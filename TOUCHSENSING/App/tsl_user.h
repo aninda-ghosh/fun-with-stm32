@@ -53,20 +53,35 @@ typedef enum
 /** 0-1-2-0 **/
 
 /* Channel IOs definition */
-#define CHANNEL_0_SRC       ((uint32_t) (GR7))
+//#define CHANNEL_0_SRC       ((uint32_t) (GR7))
+//#define CHANNEL_0_DEST      (0)
+//#define CHANNEL_0_SAMPLE    (TSL_GROUP7_IO1)		// PB12 -> GND
+//#define CHANNEL_0_CHANNEL   (TSL_GROUP7_IO2)		// PB13
+//
+//#define CHANNEL_1_SRC       ((uint32_t) (GR4))
+//#define CHANNEL_1_DEST      (1)
+//#define CHANNEL_1_SAMPLE    (TSL_GROUP4_IO1)		// PA8 -> GND
+//#define CHANNEL_1_CHANNEL   (TSL_GROUP4_IO2)		// PA9
+//
+//#define CHANNEL_2_SRC       ((uint32_t) (GR6))
+//#define CHANNEL_2_DEST      (2)
+//#define CHANNEL_2_SAMPLE    (TSL_GROUP6_IO1)		// PB4 -> GND
+//#define CHANNEL_2_CHANNEL   (TSL_GROUP6_IO2)		// PB5
+
+#define CHANNEL_0_SRC       ((uint32_t) (GR2))
 #define CHANNEL_0_DEST      (0)
-#define CHANNEL_0_SAMPLE    (TSL_GROUP7_IO1)		// PB12 -> GND
-#define CHANNEL_0_CHANNEL   (TSL_GROUP7_IO2)		// PB13
+#define CHANNEL_0_SAMPLE    (TSL_GROUP2_IO2)		// PA7 -> GND
+#define CHANNEL_0_CHANNEL   (TSL_GROUP2_IO1)		// PA6
 
-#define CHANNEL_1_SRC       ((uint32_t) (GR4))
+#define CHANNEL_1_SRC       ((uint32_t) (GR9))
 #define CHANNEL_1_DEST      (1)
-#define CHANNEL_1_SAMPLE    (TSL_GROUP4_IO1)		// PA8 -> GND
-#define CHANNEL_1_CHANNEL   (TSL_GROUP4_IO2)		// PA9
+#define CHANNEL_1_SAMPLE    (TSL_GROUP9_IO2)		// PC5 -> GND
+#define CHANNEL_1_CHANNEL   (TSL_GROUP9_IO1)		// PC4
 
-#define CHANNEL_2_SRC       ((uint32_t) (GR6))
+#define CHANNEL_2_SRC       ((uint32_t) (GR3))
 #define CHANNEL_2_DEST      (2)
-#define CHANNEL_2_SAMPLE    (TSL_GROUP6_IO1)		// PB4 -> GND
-#define CHANNEL_2_CHANNEL   (TSL_GROUP6_IO2)		// PB5
+#define CHANNEL_2_SAMPLE    (TSL_GROUP3_IO2)		// PB1 -> GND
+#define CHANNEL_2_CHANNEL   (TSL_GROUP3_IO1)		// PB0
 
 /* Bank(s) definition */
 /* 3CH_LIN_H_NBR1 bank definition*/
