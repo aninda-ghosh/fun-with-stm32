@@ -60,6 +60,11 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define PC14_OSC32_IN_Pin GPIO_PIN_14
 #define PC14_OSC32_IN_GPIO_Port GPIOC
+#define Sensor_Simulator_Pin GPIO_PIN_6
+#define Sensor_Simulator_GPIO_Port GPIOB
+#define Signal_Input_Pin GPIO_PIN_15
+#define Signal_Input_GPIO_Port GPIOB
+#define Signal_Input_EXTI_IRQn EXTI15_10_IRQn
 #define SWDIO_Pin GPIO_PIN_13
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14

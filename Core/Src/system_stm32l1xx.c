@@ -137,8 +137,7 @@ const uint8_t APBPrescTable[8]  = {0U, 0U, 0U, 0U, 1U, 2U, 3U, 4U};
   * @param  None
   * @retval None
   */
-void SystemInit (void)
-{
+void SystemInit (void){
 #ifdef DATA_IN_ExtSRAM
   SystemInit_ExtMemCtl(); 
 #endif /* DATA_IN_ExtSRAM */
