@@ -2,18 +2,12 @@
 #include "stdlib.h"
 #include "main.h"
 #include "sysclock.h"
-#include "rtc.h"
 #include "iic.h"
-#include "eeprom.h"
+#include "mpu.h"
+#include "quaternion.h"
 
 
-typedef struct __attribute__ ((packed)) calibData{
-	float a;	//4
-	float b; 	//4
-	float c; 	//4
-}CALIB_DATA;
-
-CALIB_DATA cd = {1.1, 2.2, 3.3};
+float angles[3] = {0};
 
 /**
  * @brief  The application entry point.
@@ -26,45 +20,23 @@ int main(void) {
 	/* Configure the system clock */
 	SystemClock_Config();
 
-	rtc_Init();
-	rtc_SetDateTime(17, 03, 30, 1, 24, RTC_MONTH_AUGUST, 20, RTC_WEEKDAY_MONDAY);
-	// Initialize the IIC peripheral
-	IIC_Init();
-
-
-	while(IIC_IsDevReady(0x57<<1) != 0){
- 		__NOP();
+	MPU_Init();
+	while(MPU_whoAmI() != 0x71){
+		__NOP();
 	}
+	madwickBegin();
 
-
-	//Write 2 first 32 bytes of data
-	uint16_t startAddress = 0;
-	uint8_t writedata = 0;
-	for( ;startAddress < 32; startAddress++){
-		if(writedata > 128)
-			writedata = 0;
-		writeEEPROMByte(startAddress, writedata++);
-		HAL_Delay(1);
-	}
-
-	//Read from first 32 bytes of data
-	startAddress = 0;
-	for( ;startAddress < 32; startAddress++){
-		uint8_t data = readEEPROMByte(startAddress);
-		HAL_Delay(1);
-		UNUSED(data);
-	}
 
 
 	/* Infinite loop */
 	while (1) {
 
-//		rtc_GetDateTime();		//Refresh the Time Stamp from RTC
-//		unsigned int unixTimeStamp = rtc_GetEpochTime(&systemDate, &systemTime);
-//		__NOP();
-//		UNUSED(unixTimeStamp);
+		MPU_readSensor();
+		madwickUpdate(_gyroscope_val[0], _gyroscope_val[1], _gyroscope_val[2], _accelerometer_val[0], _accelerometer_val[1], _accelerometer_val[2], _magnetometer_val[0], _magnetometer_val[1], _magnetometer_val[2]);
+		madwickGetAngles(angles);
+		__NOP();
 
-		HAL_Delay(1000);
+		HAL_Delay(10);
 	}
 }
 
