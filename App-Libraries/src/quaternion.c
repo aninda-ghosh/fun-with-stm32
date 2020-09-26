@@ -21,7 +21,7 @@ static float invSqrt(float x);
 static void computeAngles(void);
 
 
-#define sampleFreqDef   512.0f          // sample frequency in Hz
+#define sampleFreqDef   1024.0f          // sample frequency in Hz
 #define betaDef         1.0f            // 2 * proportional gain
 
 void madwickBegin(void) {
